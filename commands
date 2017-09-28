@@ -1,0 +1,11 @@
+sudo apt-get install -y build-essential autoconf gcc pkgconf libncursesw5-dev libssl-dev libperl-dev libglib2.0-dev zip make libanyevent-perl libpar-perl libnet-dns-perl libauthen-sasl-perl libio-socket-ssl-perl libdigest-perl libanyevent-irc-perl libclass-accessor-perl libtext-autoformat-perl libextutils-depends-perl libmodule-install-perl libanyevent-http-perl liburi-encode-perl
+sudo apt-get build-dep -y barnowl
+
+git clone https://github.com/ternus/barnowl
+cd barnowl
+git checkout zulip
+./autogen.sh
+./configure --without-zephyr
+make
+sudo make install
+
