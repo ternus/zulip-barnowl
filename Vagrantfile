@@ -98,7 +98,7 @@ Vagrant.configure(2) do |config|
         "api_url": "https://recurse.zulipchat.com/api/v1",                                           
         "ssl": 
         {                                                                  "ca_file": "/etc/ssl/certs/ca-certificates.crt"
-          },                    
+        },                    
         "default_realm": ""
       }
 EOF
