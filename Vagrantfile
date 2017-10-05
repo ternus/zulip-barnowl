@@ -68,11 +68,20 @@ Vagrant.configure(2) do |config|
             STDIN.gets.chomp
         end
     end
+
+    class ZRealm
+        def to_s
+            print "Enter your Zulip realm (e.g. recurse.zulipchat.com)\n" 
+            print "Realm: "
+            STDIN.gets.chomp
+        end
+    end
     
     class APIKey
         def to_s
             print "Enter your Zulip API key, which you can get from\n"
-            print "https://recurse.zulipchat.com/#settings/your-account\n"
+            print "the 'Your Account' section of the Zulip settings page\n"
+            print "and looks like: RJNPQKKRKbvYvGI323y91QB9p5r15cxf\n"
             print "API key: " 
             STDIN.gets.chomp
         end
@@ -81,28 +90,19 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-   config.vm.provision "shell", env: {"USERNAME" => Username.new, "APIKEY" => APIKey.new}, inline: <<-SHELL
-      sudo apt update -y
-      sudo apt-get install -y build-essential autoconf gcc pkgconf libncursesw5-dev libssl-dev libperl-dev libglib2.0-dev zip make libanyevent-perl libpar-perl libnet-dns-perl libauthen-sasl-perl libio-socket-ssl-perl libdigest-perl libanyevent-irc-perl libclass-accessor-perl libtext-autoformat-perl libextutils-depends-perl libmodule-install-perl libanyevent-http-perl liburi-encode-perl
-      sudo apt-get build-dep -y barnowl
-      git clone https://github.com/ternus/barnowl
-      cd barnowl
-      git checkout zulip
-      ./autogen.sh
-      ./configure --without-zephyr
-      make
-      mkdir ~/.owl/
-      cat <<EOF >~/.owl/zulip
-      { "user": "$USERNAME",                       
-        "apikey": "$APIKEY",                                                
-        "api_url": "https://recurse.zulipchat.com/api/v1",                                           
-        "ssl": 
-        {                                                                  "ca_file": "/etc/ssl/certs/ca-certificates.crt"
-        },                    
-        "default_realm": ""
-      }
-EOF
-  SHELL
+
+  config.vm.provision "file", source: "owl", destination: "$HOME/.owl"
+
+  config.vm.provision "file", source: "barnowl-256color.sh", destination: "$HOME/zulip-barnowl"
+
+  config.vm.provision "shell", env: {"ZULIP_USERNAME" => Username.new, "ZULIP_REALM" => ZRealm.new, "ZULIP_APIKEY" => APIKey.new}, path: "setup_barnowl_zulip.sh"
 
   config.ssh.forward_x11 = true
+
+  config.vm.provision "shell", inline: <<-SHELL
+echo "******** Provisioning complete!"
+echo "******** Now log in with 'vagrant ssh' and run './zulip-barnowl'."
+echo "******** Happy zuliping!"
+SHELL
+
 end

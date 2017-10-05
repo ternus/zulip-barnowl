@@ -1,0 +1,5 @@
+# Barnowl startup file
+
+zulip:login
+bindkey recv c command start-command zulip:write 
+filter zulip-private -c blue ( type zulip and isprivate true )

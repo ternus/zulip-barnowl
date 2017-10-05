@@ -1,0 +1,9 @@
+{ "user": "ZULIP_USERNAME",
+  "apikey": "ZULIP_APIKEY",
+  "api_url": "https://ZULIP_REALM/api/v1",
+  "ssl":
+  {
+    "ca_file": "/etc/ssl/certs/ca-certificates.crt"
+  },
+  "default_realm": ""
+}
