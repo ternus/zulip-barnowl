@@ -6,17 +6,23 @@ if [[ $(uname) != "Linux" ]]; then
 fi
 
 apt-get update -y
-apt-get install -y libanyevent-perl libpar-perl libnet-dns-perl \
-  libauthen-sasl-perl libio-socket-ssl-perl libdigest-perl \
-  libanyevent-irc-perl libclass-accessor-perl libtext-autoformat-perl \
-  libextutils-depends-perl libmodule-install-perl libanyevent-http-perl \
-  liburi-encode-perl libmime-base64-urlsafe-perl
-apt-get install -y barnowl
+apt-get install -y autoconf gcc pkgconf libncursesw5-dev \
+   libssl-dev libperl-dev libglib2.0-dev zip make libanyevent-perl libpar-perl \
+   libnet-dns-perl libauthen-sasl-perl libio-socket-ssl-perl libdigest-perl \
+   libanyevent-irc-perl libclass-accessor-perl libtext-autoformat-perl \
+   libextutils-depends-perl libmodule-install-perl libanyevent-http-perl \
+   liburi-encode-perl libglib-perl
+#apt-get install -y barnowl
 
 git clone https://github.com/ternus/barnowl
 pushd barnowl
 git checkout zulip
-sudo cp -r ./perl/modules/Zulip/ /usr/share/barnowl/modules/
+./autogen.sh
+./configure --without-zephyr
+make -j8 install
+
+# Remove unneeded modules
+rm -f /usr/local/share/barnowl/modules/{Facebook,Twitter}.par
 popd
 
 sed "s|ZULIP_USERNAME|$ZULIP_USERNAME|" -i .owl/zulip
