@@ -1,3 +1,3 @@
 #!/bin/bash
 TERM=screen-256color
-exec barnowl -n "$@"
+exec barnowl/barnowl -n "$@"
