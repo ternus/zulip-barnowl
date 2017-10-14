@@ -47,7 +47,7 @@ There's currently no support for:
 * Sending reactji
 * Tab-completion for usernames, or selecting them in some better way
 * Edits appearing inline
-* Calculating presence cleverly (you'll appear as fully online (green dot) at all times while running barnowl-zulip)
+* ~~Calculating presence cleverly (you'll appear as fully online (green dot) at all times while running barnowl-zulip)~~ should be fixed now!
 * Many other desirable things
 
 ## TODOs
