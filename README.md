@@ -1,5 +1,7 @@
 # Easy setup for command-line Zulip with Barnowl
 
+![Screenshot of Zulip in Barnowl](screenshot.png)
+
 [Adam Glasgall](https://github.com/aglasgall)'s beta [Zulip support for Barnowl](https://github.com/aglasgall/barnowl/tree/zulip/perl/modules/Zulip) is great, but requires compiling Barnowl from source. This isn't the easiest thing in the world, especially if you're on OS X.
 
 Maybe you just want to get a command-line interface to Zulip! That's where this Vagrant setup comes in.
