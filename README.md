@@ -45,7 +45,7 @@ There's currently no support for:
 * Receiving zulipgrams while offline (maybe)
 * Editing messages
 * Sending reactji
-* Tab-completion for usernames, or selecting them in some better way
+* ~~Tab-completion for usernames, or selecting them in some better way~~ -- added!
 * Edits appearing inline
 * ~~Calculating presence cleverly (you'll appear as fully online (green dot) at all times while running barnowl-zulip)~~ should be fixed now!
 * Many other desirable things
